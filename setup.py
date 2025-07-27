@@ -1,13 +1,36 @@
-## make a for loop that iterates over the list of files  and create __init__.py files in each directory
-import os
-def create_init_files(base_path):
-    for root, dirs, files in os.walk(base_path):
-        if '__init__.py' not in files:
-            with open(os.path.join(root, '__init__.py'), 'w') as f:
-                f.write('# This is an init file for the package\n')
+from setuptools import find_packages, setup
+from typing import List 
+ 
+def get_requirements()-> List[str]:
+    """
+    This function will return list of requirements
+    """
 
-# Example usage
-if __name__ == "__main__":
-    base_path = 'C:\code\Explora'  # Change this to your package path
-    create_init_files(base_path)
-    print("Init files created successfully.")
+    requirements_list: List[str] = []
+    try:
+        ## Open and read the requirements.txt
+        with open('requirements.txt','r') as file: 
+            lines = file.readlines()
+            # process each file 
+            for line in lines:
+                # strip whitespace and new line character
+                requirement = line.strip()
+                # ignore empty line and -e 
+                if requirement and requirement != '-e .':
+                    requirements_list.append(requirement)
+    except FileNotFoundError:
+        print("requirements.txt file not found")
+
+    return requirements_list
+print(get_requirements())
+
+
+setup(
+    name = "Xplora",
+    version = "0.0.1",
+    author="Kshitij kumrawat",
+    author_email="kshitijk146@gmail.com",
+    packages=find_packages(),
+    install_requires = get_requirements()
+
+)
