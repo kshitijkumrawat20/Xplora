@@ -3,14 +3,14 @@ from langgraph.graph import MessageState, StateGraph, END, START
 from langgraph.prebuilt import ToolNode, tools_condition 
 from prompt_library.prompt import SYSTEM_PROMT
 
-class GraphBuilder()
+class GraphBuilder:
     def __init__(self):
         self.tools = [
             
 
         ] 
     
-    def agentic_function(self):
+    def agentic_function(self, state:MessageState):
         """Main agent function """
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
