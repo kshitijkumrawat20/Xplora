@@ -23,7 +23,7 @@ class ModelLoader(BaseModel):
         self.config = ConfigLoader()   # model_post_init is a Pydantic V2 hook, which runs after model creation.It assigns a ConfigLoader() instance to self.config.This ensures the configuration is loaded whenever you create a ModelLoader.
 
     class Config:
-        arbitrary_types_allowed: True  # Allows ConfigLoader (a non-Pydantic class) to be used as a field in the model.
+        arbitrary_types_allowed = True  # Allows ConfigLoader (a non-Pydantic class) to be used as a field in the model.
 
     def load_llm(self):
         """
