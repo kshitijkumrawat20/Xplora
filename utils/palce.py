@@ -35,7 +35,7 @@ class GooglePlaceSearchTool:
 
 class TavilyPlaceSearchTool:
     def __init__(self, api_key: str):
-        self.tavily_tool = TavilySearch(topic = "general", include_answer = "advanced")
+        self.tavily_tool = TavilySearch(topic = "general", include_answer = "advanced", api_key = api_key)
 
     def tavily_search_attractions(self, place: str) -> dict:
         """
