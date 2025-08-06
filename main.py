@@ -7,6 +7,13 @@ import os , datetime
 from dotenv import load_dotenv
 from pydantic import BaseModel
 load_dotenv()
+from langsmith import traceable
+from langsmith.run_helpers import tracing_context
+
+os.environ["LANGSMITH_TRACING"] = "true"
+os.environ["LANGSMITH_ENDPOINT"] = "https://api.smith.langchain.com"
+os.environ["LANGSMITH_API_KEY"] = "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"
+os.environ["LANGSMITH_PROJECT"] = "agent-testing"
 
 app = FastAPI()
 
@@ -22,6 +29,7 @@ class QueryRequest(BaseModel):
     question: str 
 
 @app.post("/query") 
+@traceable(run_type="endpoint", name="Query Endpoint")
 async def query_ravel_agent(query: QueryRequest):
     try : 
         print(query)
@@ -33,7 +41,8 @@ async def query_ravel_agent(query: QueryRequest):
             f.write(png_graph)
 
         messages = {"messages": [query.question]}
-        output = app.invoke(messages)
+        with tracing_context(enabled=True):
+            output = app.invoke(messages)
 
         if isinstance(output, dict) and "messages" in output:
             final_output = output["messages"][-1].content

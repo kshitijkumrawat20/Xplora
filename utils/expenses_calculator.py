@@ -1,6 +1,7 @@
+from typing import List
 class calculator:
     @staticmethod
-    def multiply(a:int, b: int) -> int:
+    def multiply(a:float, b: float) -> float:
         """
         Multiply two integers.
         Args:
@@ -13,7 +14,7 @@ class calculator:
         return a * b 
 
     @staticmethod
-    def calculate_total(*x: float) -> float:
+    def calculate_total(costs: List[float]) -> float:
         """
         Calculate sum of the given list of numbers
 
@@ -23,7 +24,7 @@ class calculator:
         Returns:
             float: The sum of numbers in the list x
         """
-        return sum(x)
+        return sum(costs)
 
     @staticmethod
     def calculate_daily_budget(total:float,days: int) -> float:

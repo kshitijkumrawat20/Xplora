@@ -6,7 +6,8 @@ from tools.weather_tool import WeatherInfoTool
 from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator import CalculatorTool
 from tools.currency_conversion import CurrencyConverterTool
-
+from langsmith import traceable
+from langsmith.run_helpers import tracing_context
 class LoggingToolNode(ToolNode):
         def __call__(self, state):
             print("\n[Tools] Input messages:")
@@ -52,7 +53,7 @@ class GraphBuilder:
     from langgraph.prebuilt import ToolNode
 
     
-
+    @traceable(run_type="agent", name="Agent Node")
     def agentic_function(self, state: MessagesState):
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
