@@ -8,6 +8,12 @@ from tools.expense_calculator import CalculatorTool
 from tools.currency_conversion import CurrencyConverterTool
 from langsmith import traceable
 from langsmith.run_helpers import tracing_context
+import os
+os.environ["LANGSMITH_TRACING"] = "true"
+os.environ["LANGSMITH_ENDPOINT"] = "https://api.smith.langchain.com"
+os.environ["LANGSMITH_API_KEY"] = "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"
+os.environ["LANGSMITH_PROJECT"] = "agent-testing"
+
 class LoggingToolNode(ToolNode):
         def __call__(self, state):
             print("\n[Tools] Input messages:")
@@ -19,7 +25,7 @@ class LoggingToolNode(ToolNode):
                 print(f"  {msg}")
             return result
 class GraphBuilder:
-    def __init__(self, model_provider: str = "groq"):
+    def __init__(self, model_provider: str = "gemini"):
         self.model_loader = ModelLoader(model_provider=model_provider)
         self.llm = self.model_loader.load_llm()
 
@@ -53,7 +59,7 @@ class GraphBuilder:
     from langgraph.prebuilt import ToolNode
 
     
-    @traceable(run_type="agent", name="Agent Node")
+    # @traceable(run_type="llm", name="Agent Node")
     def agentic_function(self, state: MessagesState):
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
@@ -86,3 +92,9 @@ class GraphBuilder:
     def __call__(self):
         return self.build_graph()
 
+    def __call__(self):
+        return self.build_graph()
+
+
+# 👇 Add this line at the very bottom
+graph = GraphBuilder().build_graph()

@@ -29,7 +29,7 @@ class QueryRequest(BaseModel):
     question: str 
 
 @app.post("/query") 
-@traceable(run_type="endpoint", name="Query Endpoint")
+# @traceable(run_type="chain", name="Query Endpoint")
 async def query_ravel_agent(query: QueryRequest):
     try : 
         print(query)

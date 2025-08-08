@@ -2,5 +2,9 @@ llm:
   groq: 
     provider: "groq"
     model_name: "llama3-70b-8192"
+  gemini:
+    provider: "gemini"
+    model_name: "gemini-2.5-flash"
+
 
     
