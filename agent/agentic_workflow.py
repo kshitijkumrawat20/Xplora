@@ -1,7 +1,7 @@
 from utils.model_loader import ModelLoader
 from langgraph.graph import StateGraph, END, START, MessagesState
 from langgraph.prebuilt import ToolNode, tools_condition
-from prompt_library.prompt import SYSTEM_PROMPT
+from prompt_library.agent_prompts import SYSTEM_PROMPT
 from tools.weather_tool import WeatherInfoTool
 from tools.place_search_tool import PlaceSearchTool
 from tools.expense_calculator import CalculatorTool
