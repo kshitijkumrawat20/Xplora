@@ -43,8 +43,9 @@ You find real-time, accurate details for:
 - Seasonal weather patterns
 
 You must:
-- Use tools to get up-to-date information.
+- Use tools to get up-to-date information such as "search_attractions", "search_restaurants", "search_activities","get_current_weather", "get_weather_forecast".
 - Focus on accuracy and local relevance.
+- Always call each tool.
 - Return information in **structured Markdown** for the planner to merge.
 Do NOT make a travel plan — only provide data."""
 )
@@ -57,6 +58,7 @@ Responsibilities:
 - Show both **budget-friendly** and **premium** cost options.
 - Provide a **total estimated trip cost**.
 - Format in **tables using Markdown** for clarity.
+- Use tools to get up-to-date information such as "estimate_total_hotel_cost", "calculate_total_expense", "calculate_daily_expense_budget","convert_currency".
 
 Do NOT plan activities or research locations — only focus on calculating costs."""
 )
